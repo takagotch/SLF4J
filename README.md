@@ -98,7 +98,28 @@ public class AbbreviatorTest {
     assertTrue("filename=[" + filename + "] result=[" + result + "]", result.length() <= filename.length());
   }
   
+  void assertUsefulness(int averageLen, String filename, String result, int fixedLen, int targetLength) {
+    int resLen = result.length();
+    
+    int margin = averageLen * 4;
+    if (targetLength > fixedLen + margin) {
+      assertTrue("filename=[" + filename + "]" + result + "] resultLength=" + resLen + " fixedLength=" + fixedLen + ", targetLength="
+        + targetLength + ", avgLen=" + aerageLen, result.length() <= targetLength + averageLen);
+    }
+  }
   
+  void assertTheory1(String filename, String result, int fixedLen, int targetLength) {
+    String prefix = filename.substring(0, fixedLen);
+    assertTrue(result.startsWith(prefix));
+  }
+  
+  void assertTheory2(String filename, String result, int fixedLen, int targetLength) {
+    if (filename == result) {
+      return;
+    }
+    int filterIndex = result.indexOf(Abbreviator.FILTER);
+    assertTrue(fillerIndex >= fixedLen);
+  }
 }
 
 ```
